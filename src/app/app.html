@@ -7,10 +7,22 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button class="item item-block item-ios" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+      <button class="item item-block item-ios" menuClose ion-item *ngFor="let p of data">
+        {{p.name}}
+      </button>
     </ion-list>
+    <!-- <ion-list>
+      <ion-item padding *ngFor="let d of pages" (click)="toggleDetails(d)">
+        <ion-icon color="primary" item-right [name]="d.icon"></ion-icon>
+        {{d.title}}
+        <div *ngIf="d.showDetails">
+          ssss
+        </div>
+      </ion-item>
+    </ion-list> -->
   </ion-content>
 
 </ion-menu>

@@ -1,3 +1,38 @@
 page-home {
-
+    .bg {
+        background-image: url('../assets/imgs/bg-captain.jpg');
+        background-size: cover;
+        background-position: center; 
+    }
+    .order-grid {
+        .cell-title {
+            background-color:#B42623;
+            padding: 5px;
+            text-align: center;
+            font-size: 18px;
+            color: #FDFCFA;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .cell-content {
+            background-color:#FDFCFA;
+            font-size: 12px;
+        }
+    }
+    
+    
+    .product-grid {
+        padding-bottom: 10px;
+        border-radius: 5%;
+        background-color:rgba(105, 105, 105, 0.3);
+        .img-product {
+            height: 200px;
+            width: 100%;
+        }
+        .cell-title {
+            color: wheat;
+            text-align: center;
+            font-size: 18px;          
+        }
+    }
 }

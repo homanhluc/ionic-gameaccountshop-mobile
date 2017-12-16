@@ -7,12 +7,45 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="bg">
+  <ion-grid class="order-grid">
+    <ion-row class="cell-title">
+      <ion-col col-12>KHÁCH HÀNG VỪA GIAO DỊCH</ion-col>
+    </ion-row>
+    <ion-row class="cell-content" *ngFor="let i of dataOrders">
+      <ion-col col-5>{{ i.user.name }}</ion-col>
+      <ion-col col-4>Mua ACC #{{ i.id }}</ion-col>
+      <ion-col col-3>{{ i.total }}đ</ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-grid>
+    <ion-row *ngFor="let i of dataProducts" class="product-grid">
+      <ion-col class="cell-title" col-12>
+        ACC số #{{ i.id }}
+      </ion-col>
+      <ion-col class="cell-title" col-12>
+        {{ i.name }}
+      </ion-col>
+      <ion-col col-12>
+        <img class="img-product" [src]="i.image">
+      </ion-col>
+      <ion-col class="cell-title" col-12>
+        Giá bán: {{ i.price }}
+        <sup>đ</sup>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button icon-start>
+          <ion-icon name="star"></ion-icon>
+          Chi tiết
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button icon-end>
+          Mua ngay
+          <ion-icon name="star"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
