@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 @Component({
   selector: 'page-buy',
   templateUrl: 'buy.html',
 })
 export class BuyPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  product: any;
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public viewCtrl: ViewController) {
   }
   dataBuy = {
     "name" : "Order test",
@@ -27,6 +30,11 @@ export class BuyPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuyPage');
+    this.product = this.navParams.get('product');
+    console.log(this.product);
   }
-
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
+  
 }

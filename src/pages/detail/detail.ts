@@ -1,8 +1,10 @@
+import { BuyPage } from './../buy/buy';
 import { IProduct } from './../../model/product';
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {trigger,state,animate,style,transition} from '@angular/animations';
+import { ModalController, LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-detail',
@@ -10,11 +12,11 @@ import {trigger,state,animate,style,transition} from '@angular/animations';
   animations: [
     trigger("showInfo", [
         state("true", style({
-            "opacity": 1,
+            //"opacity": 1,
             'display': 'block'
         })),
         state("false", style({
-            "opacity": 0,
+            //"opacity": 0,
             'display': 'none'
         })),
         transition("true => false", animate("350ms")),
@@ -27,15 +29,38 @@ export class DetailPage {
   data: IProduct;
   dataInvolve: IProduct[];
   category: any;
+  categoryId: number;
   showhideinfo: boolean = true;
   check: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public service: CustomerServiceProvider) {
-    this.paramID = navParams.get('paramID');
-    //this.paramID = 24;
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public service: CustomerServiceProvider,
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController) {
+    //this.paramID = navParams.get('paramID');
+    this.paramID = 24;
   }
 
   ionViewDidLoad() {
     this.loadDetail();
+  }
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Chờ chút xíu...",
+    });
+    loader.present();
+    // load data involve with id of catagory
+    this.service.listProductInCategories(this.categoryId).subscribe(data => {
+      this.dataInvolve = data.filter(a => {
+        return a.id !== this.paramID;
+      });
+      loader.dismiss();
+    });
+  }
+  test(){
+    var a: string = "âsss;sằe;fề;fêfè;sâs;sâs";
+    var p: string[] = a.split(';');
+    console.log(p);
   }
   // Animation show hide
   infoDetail() {
@@ -44,8 +69,11 @@ export class DetailPage {
   detailProduct(id) {
 
   }
-  buyProduct(id) {
-
+  buyProduct(product) {
+    let modal = this.modalCtrl.create(BuyPage, {
+      product : product
+    });
+    modal.present();
   }
   //--------------- START load detail
   loadDetail() {
@@ -64,19 +92,12 @@ export class DetailPage {
           this.check = false;
           this.data = product;
           this.category = category.name;
-          this.loadDataInvolve(category.id);
+          this.categoryId = category.id;
           break;
         }
       }
     });
   }
   //--------------- END load detail
-  // load data involve with id of catagory
-  loadDataInvolve(category) {
-    this.service.listProductInCategories(category).subscribe(data => {
-      this.dataInvolve = data.filter(a => {
-        return a.id !== this.paramID;
-      });
-    });
-  }
+
 }

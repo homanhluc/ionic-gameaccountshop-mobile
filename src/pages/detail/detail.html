@@ -21,7 +21,7 @@
         <sup>đ</sup>
       </ion-col>
       <ion-col col-12>
-        <button ion-button full>
+        <button ion-button full (click) = "buyProduct(data)" >
           <ion-icon name="cart">&nbsp;</ion-icon>
           Mua ngay
         </button>
@@ -60,7 +60,7 @@
       </ion-row>
   </ion-grid>
   <!-- data Involve -->
-  <button ion-button full>Acc cùng thể loại</button>
+  <button ion-button full (click)="presentLoading()">Acc cùng thể loại</button>
   <ion-card *ngFor="let i of dataInvolve">
 
     <img src="/api/admin/product/image?name={{i.image}}" />
@@ -93,7 +93,7 @@
           </button>
         </ion-col>
         <ion-col col-6>
-          <button (click)="buyProduct(i.id)" full ion-button ion-end>
+          <button (click)="buyProduct(i)" full ion-button ion-end>
             <ion-icon name="cart">&nbsp;</ion-icon>Mua ngay
           </button>
         </ion-col>

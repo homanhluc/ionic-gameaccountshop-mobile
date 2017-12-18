@@ -44,7 +44,8 @@ export class HomePage {
   }
   loadNewOrder() {
     this.service.listOrderProducts().subscribe(data => {
-      this.dataOrders = data;
+      this.dataOrders = data.content;
+      console.log(data);
     }, error => {
       console.log(error);
     });
