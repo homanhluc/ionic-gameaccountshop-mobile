@@ -1,3 +1,4 @@
+//import { DetailPage } from './../pages/detail/detail';
 import { CustomerServiceProvider } from './../providers/customer-service/customer-service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';

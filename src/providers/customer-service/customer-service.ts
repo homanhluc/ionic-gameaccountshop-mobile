@@ -27,8 +27,8 @@ export class CustomerServiceProvider {
       .catch(this.errorHandler);
   }
   // Danh sach cac san pham thuoc loai game
-  listProductInCategories(id: number) {
-    return this.http.get(this.baseUrl + '/category/'+ id +'/products', this.options)
+  listProductInCategories(id) {
+    return this.http.get(this.baseUrl + '/v1/category/'+ id +'/products', this.options)
       .map((res: Response) => res.json())
       .catch(this.errorHandler);
   }

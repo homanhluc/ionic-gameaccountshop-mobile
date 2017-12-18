@@ -1,0 +1,35 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content scroll="false" padding class="login">
+	<div ion-fixed>
+		<ion-grid>
+			<ion-row>
+				<ion-col col-4></ion-col>
+				<ion-col col-4 style="margin-left: auto;margin-right: auto;display: block;">
+					<img src="../assets/imgs/logolol.png">
+				</ion-col>
+				<ion-col col-4></ion-col>
+			</ion-row>
+		</ion-grid>
+		<form (ngSubmit)="login(usercreds)" #loginForm="ngForm">
+			<ion-list class="list-form">
+
+				<ion-item class="item-form1">
+					<ion-input name="email" [(ngModel)]="usercreds.email" class="input-form" type="text" placeholder="Email" required></ion-input>
+				</ion-item>
+				<ion-item class="item-form2">
+					<ion-input name="password" [(ngModel)]="usercreds.password" class="input-form" type="password" placeholder="Mật khẩu" required></ion-input>
+				</ion-item>
+
+			</ion-list>
+
+			<button class="btn-login" [disabled]="!loginForm.form.valid" ion-button block type="submit"><ion-icon name="unlock"> </ion-icon> Đăng nhập</button>
+		</form>
+		<div class="forgotpassword" text-center>Quên mật khẩu?</div>
+		<button class="btn-register" ion-button block>Đăng ký</button>
+	</div>
+</ion-content>
