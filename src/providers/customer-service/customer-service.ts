@@ -33,7 +33,7 @@ export class CustomerServiceProvider {
       .catch(this.errorHandler);
   }
   // Danh sach tat ca san pham
-  listProducts(page: number) {
+  listProducts(page: number): Observable<Object> {
     return this.http.get(this.baseUrl + '/v1/product/latest?page=' + page, this.options)
       .map((res: Response) => res.json())
       .catch(this.errorHandler);

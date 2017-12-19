@@ -46,15 +46,13 @@
     </ion-row>
     <ion-row>
         <ion-col col-12>
-          <button class="item item-block item-ios" full ion-button (click)="infoDetail()">Danh sách tướng
-            <ion-toggle disabled checked="false"></ion-toggle>
+          <button full ion-button (click)="infoDetail()">
+            Danh sách tướng
           </button>
-          <ion-row [@showInfo]="!showhideinfo">
-            <ion-col col-12>{{ data?.description }}</ion-col>
-            <ion-col col-12>description 1</ion-col>
-            <ion-col col-12>description 1</ion-col>
-            <ion-col col-12>description 1</ion-col>
-            <ion-col col-12>description 1</ion-col>
+          <ion-row>
+            <ion-col col-3 *ngFor="let img of listImage">
+              <img src="assets/imgs/avalol/{{img}}">
+            </ion-col>
           </ion-row>
         </ion-col>
       </ion-row>

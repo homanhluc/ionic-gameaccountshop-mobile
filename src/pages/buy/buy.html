@@ -29,11 +29,36 @@
           <h2>Giá: {{ product?.price }} VNĐ</h2>
           <p>Tài khoản: {{ product?.name }}</p>
         </ion-item>
-        <ion-item>
-          a
+        <ion-item (click) = "showPrompt('name')">
+          Tên đơn hàng
           <ion-note item-end>
-            b
+            {{ order?.name }}
           </ion-note>
         </ion-item>
+        <ion-item (click) = "showPrompt('phone')">
+          Số điện thoại
+          <ion-note item-end>
+            {{ order?.phone }}
+          </ion-note>
+        </ion-item>
+        <ion-item (click) = "showPrompt('address')">
+          Địa chỉ
+          <ion-note item-end>
+            {{ order?.address }}
+          </ion-note>
+        </ion-item>
+        <ion-item (click) = "showPrompt('note')">
+          Chú thích
+          <ion-note item-end>
+            {{ order?.note }}
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Số dư còn lại
+          <ion-note item-end>
+            {{surplus - product?.price}} vnđ
+          </ion-note>
+        </ion-item>
+        <button (click) = "buy()" ion-button full>Mua</button>
     </ion-list>
 </ion-content>

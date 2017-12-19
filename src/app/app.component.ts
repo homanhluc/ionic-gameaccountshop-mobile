@@ -1,4 +1,3 @@
-import { DetailPage } from './../pages/detail/detail';
 import { CustomerServiceProvider } from './../providers/customer-service/customer-service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -14,7 +13,7 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = DetailPage;
+  rootPage: any = HomePage;
   data: any;
   pages: Array<{ title: string, component: any, icon: string, showDetails: boolean }>;
 

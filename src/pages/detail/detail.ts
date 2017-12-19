@@ -32,13 +32,13 @@ export class DetailPage {
   categoryId: number;
   showhideinfo: boolean = true;
   check: boolean = true;
+  listImage: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public service: CustomerServiceProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController) {
-    //this.paramID = navParams.get('paramID');
-    this.paramID = 24;
+    this.paramID = navParams.get('paramID');
   }
 
   ionViewDidLoad() {
@@ -46,7 +46,7 @@ export class DetailPage {
   }
   presentLoading() {
     let loader = this.loadingCtrl.create({
-      content: "Chờ chút xíu...",
+      content: "Đang tải...",
     });
     loader.present();
     // load data involve with id of catagory
@@ -57,10 +57,10 @@ export class DetailPage {
       loader.dismiss();
     });
   }
-  test(){
-    var a: string = "âsss;sằe;fề;fêfè;sâs;sâs";
-    var p: string[] = a.split(';');
-    console.log(p);
+  presentLoadingImage(images){
+    var image: string = images;
+    this.listImage = image.split('; ');
+    console.log(this.listImage);
   }
   // Animation show hide
   infoDetail() {
@@ -82,6 +82,7 @@ export class DetailPage {
         console.log(this.check);
         if (!this.check) break;
         this.listProductInCategories(category.id, category);
+        
       }
     });
   }
@@ -93,6 +94,7 @@ export class DetailPage {
           this.data = product;
           this.category = category.name;
           this.categoryId = category.id;
+          this.presentLoadingImage(product.description);
           break;
         }
       }
