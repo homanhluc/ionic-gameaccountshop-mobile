@@ -1,3 +1,17 @@
 page-detail {
-
+    .bg {
+        background-image: url('../assets/imgs/bg-captain.jpg');
+        background-size: cover;
+        background-position: center; 
+    }
+    .bg-title {
+        color: white;
+        background-color: rgba($color: #706e6e, $alpha: 0.2);
+    }
+    .ion-lb {
+        color: white;
+    }
+    .img-product {
+        
+    }
 }

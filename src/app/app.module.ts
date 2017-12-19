@@ -1,3 +1,4 @@
+import { ChatPage } from './../pages/chat/chat';
 import { BuyPage } from './../pages/buy/buy';
 import { DetailPage } from './../pages/detail/detail';
 import { LoginPage } from './../pages/login/login';
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListPage,
     LoginPage,
     DetailPage,
-    BuyPage
+    BuyPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListPage,
     LoginPage,
     DetailPage,
-    BuyPage
+    BuyPage,
+    ChatPage
   ],
   providers: [
     StatusBar,

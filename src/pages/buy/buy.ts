@@ -1,6 +1,6 @@
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ViewController, AlertController, ToastController } from 'ionic-angular';
 
 @Component({
@@ -26,7 +26,8 @@ export class BuyPage {
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
-    public service: CustomerServiceProvider) {
+    public service: CustomerServiceProvider,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -108,6 +109,15 @@ export class BuyPage {
         }
       }
       this.buyService(dataBuy);
+    }
+  }
+  buyService(data) {
+    let loader = this.loadingCtrl.create({
+      content: "Đang mua...",
+    });
+    loader.present();
+    this.service.buyProduct(data).subscribe((data) => {
+      loader.dismiss();
       let prompt = this.alertCtrl.create({
         title: 'Thông báo',
         message: "Bạn đã mua hàng thành công!",
@@ -121,11 +131,6 @@ export class BuyPage {
         ]
       });
       prompt.present();
-    }
-  }
-  buyService(data) {
-    this.service.buyProduct(data).subscribe((data) => {
-      console.log(data);
     }, (error) => {
       console.log(error);
     });

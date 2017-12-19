@@ -3,7 +3,7 @@ import { IProduct } from './../../model/product';
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {trigger,state,animate,style,transition} from '@angular/animations';
+import { trigger, state, animate, style, transition } from '@angular/animations';
 import { ModalController, LoadingController } from 'ionic-angular';
 
 @Component({
@@ -11,18 +11,18 @@ import { ModalController, LoadingController } from 'ionic-angular';
   templateUrl: 'detail.html',
   animations: [
     trigger("showInfo", [
-        state("true", style({
-            //"opacity": 1,
-            'display': 'block'
-        })),
-        state("false", style({
-            //"opacity": 0,
-            'display': 'none'
-        })),
-        transition("true => false", animate("350ms")),
-        transition("false => true", animate("350ms"))
+      state("true", style({
+        //"opacity": 1,
+        'display': 'block'
+      })),
+      state("false", style({
+        //"opacity": 0,
+        'display': 'none'
+      })),
+      transition("true => false", animate("350ms")),
+      transition("false => true", animate("350ms"))
     ])
-]
+  ]
 })
 export class DetailPage {
   paramID: number;
@@ -33,8 +33,8 @@ export class DetailPage {
   showhideinfo: boolean = true;
   check: boolean = true;
   listImage: any;
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     public service: CustomerServiceProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController) {
@@ -57,7 +57,7 @@ export class DetailPage {
       loader.dismiss();
     });
   }
-  presentLoadingImage(images){
+  presentLoadingImage(images) {
     var image: string = images;
     this.listImage = image.split('; ');
     console.log(this.listImage);
@@ -67,23 +67,30 @@ export class DetailPage {
     this.showhideinfo = !this.showhideinfo;
   }
   detailProduct(id) {
+    this.navCtrl.push(DetailPage, {
+      paramID: id
+    });
 
   }
   buyProduct(product) {
     let modal = this.modalCtrl.create(BuyPage, {
-      product : product
+      product: product
     });
     modal.present();
   }
   //--------------- START load detail
   loadDetail() {
+    let loader = this.loadingCtrl.create({
+      content: "Đang tải...",
+    });
+    loader.present();
     this.service.listCategories().subscribe(id => {
       for (var category of id) {
         console.log(this.check);
         if (!this.check) break;
         this.listProductInCategories(category.id, category);
-        
       }
+      loader.dismiss();
     });
   }
   listProductInCategories(id, category) {

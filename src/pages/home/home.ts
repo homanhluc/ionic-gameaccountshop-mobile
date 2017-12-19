@@ -1,8 +1,8 @@
+import { BuyPage } from './../buy/buy';
 import { DetailPage } from './../detail/detail';
-import { IProduct } from './../../model/product';
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -11,13 +11,17 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   dataOrders: any;
-  dataProducts: IProduct[];
+  dataProducts: any = [];
+  idOrder: string[] = [];
   private page = 0;
-  constructor(public navCtrl: NavController, public service: CustomerServiceProvider) {
+  constructor(public navCtrl: NavController,
+    public service: CustomerServiceProvider,
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController) {
 
   }
   ionViewDidLoad() {
-    this.loadNewOrder();
     this.loadProducts();
   }
   detailProduct(id) {
@@ -25,15 +29,28 @@ export class HomePage {
       paramID: id
     });
   }
-  buyProduct(id) {
-
+  buyProduct(product) {
+    let modal = this.modalCtrl.create(BuyPage, {
+      product: product
+    });
+    modal.present();
   }
   doInfinite(infiniteScroll) {
     this.page++;
     setTimeout(() => {
       this.service.listProducts(this.page).subscribe((data) => {
-        for (let i = 0; i < data.length; i++) {
-          this.dataProducts.push( data[i] );
+        for (let i = 0; i < Object.keys(data).length; i++) {
+          if(data.content[i] !== undefined) {
+            this.dataProducts.push(data.content[i]);
+          }
+        }
+        if(data.content[0] === undefined) {
+          let toast = this.toastCtrl.create({
+            message: 'Danh sách trống!',
+            duration: 1500,
+            position: 'bottom'
+          });
+          toast.present(toast);
         }
       }, (error) => {
         console.log(error);
@@ -45,15 +62,20 @@ export class HomePage {
   loadNewOrder() {
     this.service.listOrderProducts().subscribe(data => {
       this.dataOrders = data.content;
-      console.log(data);
+      console.log(this.dataOrders);
     }, error => {
       console.log(error);
     });
   }
   loadProducts() {
+    let loading = this.loadingCtrl.create({
+      content: 'Đang tải...'
+    });
+    loading.present();
     this.service.listProducts(this.page).subscribe((data) => {
-      this.dataProducts = data;
-      console.log(data);
+      this.loadNewOrder();
+      this.dataProducts = data.content;
+      loading.dismiss();
     }, (error) => {
       console.log(error);
       // , () => {
@@ -61,6 +83,14 @@ export class HomePage {
       //     element.image = element.image === null ? '' : this.service.getImage((element.image));
       //   });
       // }
+    });
+  }
+  checkId() {
+    this.service.checkProductOrdered().subscribe((data) => {
+      for (var d of data) {
+        this.idOrder.push(d.product.id);
+      }
+
     });
   }
 }

@@ -5,6 +5,7 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class CustomerServiceProvider {
@@ -33,7 +34,7 @@ export class CustomerServiceProvider {
       .catch(this.errorHandler);
   }
   // Danh sach tat ca san pham
-  listProducts(page: number): Observable<Object> {
+  listProducts(page: number) {
     return this.http.get(this.baseUrl + '/v1/product/latest?page=' + page, this.options)
       .map((res: Response) => res.json())
       .catch(this.errorHandler);
@@ -58,6 +59,12 @@ export class CustomerServiceProvider {
   // Get anh
   getImage(name): string {
     return this.baseUrl + '/admin/product/' + 'image?name=' + name;
+  }
+  // kiểm tra hàng đã được đặt chưa nếu có thì ko show
+  checkProductOrdered() {
+    return this.http.get(this.baseUrl + '/admin/items', this.options)
+    .map((res: Response) => res.json())
+    .catch(this.errorHandler);
   }
   errorHandler(error: Response) {
     return Observable.throw(error || 'SERVER ERROR');

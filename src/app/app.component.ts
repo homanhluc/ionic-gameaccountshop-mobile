@@ -1,3 +1,4 @@
+import { ChatPage } from './../pages/chat/chat';
 import { CustomerServiceProvider } from './../providers/customer-service/customer-service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -27,11 +28,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Trang chủ', component: HomePage, icon: 'ios-add-circle-outline', showDetails: false },
-      { title: 'Loại game', component: ListPage, icon: 'ios-add-circle-outline', showDetails: false }
+      { title: 'Loại game', component: ListPage, icon: 'ios-add-circle-outline', showDetails: false },
+      { title: 'Tư vấn trực tuyến', component: ChatPage, icon: 'ios-add-circle-outline', showDetails: false }
     ];
 
   }
-
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -40,7 +41,6 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
