@@ -16,6 +16,8 @@ import { CustomerServiceProvider } from '../providers/customer-service/customer-
 import { HttpModule } from '@angular/http';
 import { AuthProvider } from '../providers/auth/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

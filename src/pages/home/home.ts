@@ -14,12 +14,12 @@ export class HomePage {
   dataProducts: any = [];
   idOrder: string[] = [];
   private page = 0;
+  nickname = '';
   constructor(public navCtrl: NavController,
     public service: CustomerServiceProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController) {
-
   }
   ionViewDidLoad() {
     this.loadProducts();
