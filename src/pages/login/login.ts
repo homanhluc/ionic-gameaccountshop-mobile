@@ -1,3 +1,4 @@
+import { UserService } from './../../providers/customer-service/user-service';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -13,7 +14,10 @@ export class LoginPage {
       email: '',
       password: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public authProvider: AuthProvider,
+  public userService:UserService) {
   }
 
   ionViewDidLoad() {
@@ -21,9 +25,8 @@ export class LoginPage {
   }
   login(user) {
     console.log(user);
-    this.authProvider.login(user).then(data => {
-      this.navCtrl.setRoot(HomePage);
-    });
+    this.userService.setUserName(user.email);
+    this.navCtrl.setRoot(HomePage);
   }
 
 }

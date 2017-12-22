@@ -1,3 +1,4 @@
+import { UserService } from './../../providers/customer-service/user-service';
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
@@ -27,7 +28,8 @@ export class BuyPage {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public service: CustomerServiceProvider,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController, 
+    public userService: UserService) {
   }
 
   ionViewDidLoad() {
@@ -105,7 +107,7 @@ export class BuyPage {
           productPrice: this.product.price
         }],
         user: {
-          email: this.user.email
+          email: this.userService.getUserName()
         }
       }
       this.buyService(dataBuy);

@@ -1,3 +1,4 @@
+import { UserService } from './../../providers/customer-service/user-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Socket } from 'ng-socket-io';
@@ -16,10 +17,11 @@ export class ChatPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private socket: Socket,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private userService: UserService) {
     //this.nickname = this.navParams.get('nickname');
     this.socket.connect();
-    this.socket.emit('user-online', this.nickname = this.makeid());
+    this.socket.emit('user-online', this.nickname = this.userService.getUserName());
     this.getMessages().subscribe(message => {
       this.messages.push(message);
       console.log(message);

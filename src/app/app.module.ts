@@ -1,3 +1,4 @@
+import { UserService } from './../providers/customer-service/user-service';
 import { ChatPage } from './../pages/chat/chat';
 import { BuyPage } from './../pages/buy/buy';
 import { DetailPage } from './../pages/detail/detail';
@@ -51,7 +52,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CustomerServiceProvider,
-    AuthProvider
+    AuthProvider,
+    UserService
   ]
 })
 export class AppModule {}

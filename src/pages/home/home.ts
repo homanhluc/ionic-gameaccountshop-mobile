@@ -2,7 +2,7 @@ import { BuyPage } from './../buy/buy';
 import { DetailPage } from './../detail/detail';
 import { CustomerServiceProvider } from './../../providers/customer-service/customer-service';
 import { Component } from '@angular/core';
-import { NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, ModalController, LoadingController, ToastController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -16,6 +16,7 @@ export class HomePage {
   private page = 0;
   nickname = '';
   constructor(public navCtrl: NavController,
+    public navParam: NavParams,
     public service: CustomerServiceProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,

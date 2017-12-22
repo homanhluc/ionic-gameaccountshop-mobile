@@ -1,3 +1,4 @@
+import { LoginPage } from './../pages/login/login';
 import { ChatPage } from './../pages/chat/chat';
 import { CustomerServiceProvider } from './../providers/customer-service/customer-service';
 import { Component, ViewChild } from '@angular/core';
@@ -14,7 +15,7 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
   data: any;
   pages: Array<{ title: string, component: any, icon: string, showDetails: boolean }>;
 
